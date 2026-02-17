@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Performance Predictor</title>
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6dd5fa, #ffffff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Container */
+        .container {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+            width: 400px;
+        }
+
+        /* Title */
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        /* Labels and Inputs */
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        select, input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 5px rgba(74,144,226,0.5);
+        }
+
+        /* Button */
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background-color: #4a90e2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #357ab7;
+        }
+
+        /* Result Box */
+        .result {
+            margin-top: 20px;
+            padding: 12px;
+            border-left: 5px solid #4caf50;
+            background-color: #e6f4ea;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Performance Predictor</h1>
+        <form method="POST" action="/predictdata">
+            <!-- Gender -->
+            <label for="gender">Gender</label>
+            <select name="gender" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+
+            <!-- Race / Ethnicity -->
+            <label for="ethnicity">Race / Ethnicity</label>
+            <select name="ethnicity" required>
+                <option value="">Select</option>
+                <option value="group A">Group A</option>
+                <option value="group B">Group B</option>
+                <option value="group C">Group C</option>
+                <option value="group D">Group D</option>
+                <option value="group E">Group E</option>
+            </select>
+
+            <!-- Parental Education -->
+            <label for="parental_level_of_education">Parental Level of Education</label>
+            <select name="parental_level_of_education" required>
+                <option value="">Select</option>
+                <option value="high school">High School</option>
+                <option value="some college">Some College</option>
+                <option value="associate's degree">Associate's Degree</option>
+                <option value="bachelor's degree">Bachelor's Degree</option>
+                <option value="master's degree">Master's Degree</option>
+            </select>
+
+            <!-- Lunch -->
+            <label for="lunch">Lunch</label>
+            <select name="lunch" required>
+                <option value="">Select</option>
+                <option value="standard">Standard</option>
+                <option value="free/reduced">Free / Reduced</option>
+            </select>
+
+            <!-- Test Preparation -->
+            <label for="test_preparation_course">Test Preparation Course</label>
+            <select name="test_preparation_course" required>
+                <option value="">Select</option>
+                <option value="none">None</option>
+                <option value="completed">Completed</option>
+            </select>
+
+            <!-- Scores -->
+            <label for="reading_score">Reading Score</label>
+            <input type="number" name="reading_score" min="0" max="100" required>
+
+            <label for="writing_score">Writing Score</label>
+            <input type="number" name="writing_score" min="0" max="100" required>
+
+            <!-- Submit -->
+            <button type="submit">Predict</button>
+        </form>
+
+        <!-- Prediction Result -->
+        {% if results %}
+        <div class="result">
+            Predicted Math Score: {{ results }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
